@@ -101,8 +101,16 @@ class AuthService:
         access_token = create_access_token(str(user.id), user.role.value, access_jti)
         refresh_token = create_refresh_token(str(user.id), user.role.value, refresh_jti)
 
-        # Create session
+      # Calculate risk score
+        from app.ml.risk_scorer import risk_scorer
         from datetime import timedelta
+        risk_result = risk_scorer.score(
+            failed_attempts=user.failed_login_attempts,
+            mfa_enabled=user.mfa_enabled,
+            user_agent=user_agent,
+            is_new_device=data.device_fingerprint is None,
+        )
+
         session = UserSession(
             user_id=user.id,
             access_token_jti=access_jti,
@@ -110,9 +118,9 @@ class AuthService:
             ip_address=ip,
             user_agent=user_agent,
             device_fingerprint=data.device_fingerprint,
-            expires_at=datetime.now(timezone.utc) + timedelta(
-                days=7
-            ),
+            risk_score=risk_result["risk_score"],
+            trust_score=risk_scorer.trust_score(risk_result["risk_score"]),
+            expires_at=datetime.now(timezone.utc) + timedelta(days=7),
         )
         db.add(session)
 
@@ -130,7 +138,13 @@ class AuthService:
         ))
         await db.commit()
 
-        return Token(access_token=access_token, refresh_token=refresh_token)
+        return Token(
+            access_token=access_token,
+            refresh_token=refresh_token,
+            risk_score=risk_result["risk_score"],
+            risk_level=risk_result["risk_level"],
+            requires_mfa=risk_result["requires_mfa"],
+        )
 
     # ── Get current user from token ───────────────────────────────────────────
     async def get_current_user(self, db: AsyncSession, token: str) -> User:
