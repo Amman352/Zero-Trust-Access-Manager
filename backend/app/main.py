@@ -6,6 +6,9 @@ from sqlalchemy import text
 from app.core.config import settings
 from app.core.database import AsyncSessionLocal
 from app.api.v1.auth import router as auth_router
+from app.api.v1.users import router as users_router
+from app.api.v1.mfa import router as mfa_router
+from app.api.v1.sessions import router as sessions_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -25,11 +28,12 @@ app.add_middleware(
 
 Instrumentator().instrument(app).expose(app)
 
-# ── Routers ───────────────────────────────────────────────────────────────────
 app.include_router(auth_router, prefix="/api/v1")
+app.include_router(users_router, prefix="/api/v1")
+app.include_router(mfa_router, prefix="/api/v1")
+app.include_router(sessions_router, prefix="/api/v1")
 
 
-# ── Health ────────────────────────────────────────────────────────────────────
 @app.get("/health", tags=["Health"])
 async def health_check():
     db_status = "unreachable"
@@ -39,7 +43,6 @@ async def health_check():
             db_status = "healthy"
     except Exception:
         pass
-
     return {
         "status": "healthy" if db_status == "healthy" else "degraded",
         "app": settings.APP_NAME,
