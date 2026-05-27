@@ -6,11 +6,14 @@ class Token(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
+    risk_score: Optional[float] = None
+    risk_level: Optional[str] = None
+    requires_mfa: Optional[bool] = None
 
 
 class TokenPayload(BaseModel):
-    sub: str          # user id
-    jti: str          # JWT ID (for blacklisting)
-    type: str         # "access" or "refresh"
+    sub: str
+    jti: str
+    type: str
     role: str
     exp: int
