@@ -12,7 +12,12 @@ const useAuthStore = create((set) => ({
   login: async (email, password) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await authAPI.login({ email, password });
+      const res = await authAPI.login({
+        email: email,
+        password: password,
+        device_fingerprint: null,
+        totp_code: null,
+      });
       const { access_token, refresh_token, risk_score, risk_level } = res.data;
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("refresh_token", refresh_token);
