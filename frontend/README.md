@@ -1,16 +1,46 @@
-# React + Vite
+python3 -c "
+content = '''# Zero Trust Access Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+\`\`\`
+███████╗████████╗ █████╗ ███╗ ███╗
+╚════██║╚══██╔══╝██╔══██╗████╗ ████║
+██╔╝ ██║ ███████║██╔████╔██║
+██╔╝ ██║ ██╔══██║██║╚██╔╝██║
+██║ ██║ ██║ ██║██║ ╚═╝ ██║
+╚═╝ ╚═╝ ╚═╝ ╚═╝╚═╝ ╚═╝
+\`\`\`
 
-Currently, two official plugins are available:
+**Enterprise-grade Zero Trust Authentication Platform with ML-Powered Risk Scoring**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> An AI-powered Identity Access Management system that evaluates every login in real time using behavioral signals and Isolation Forest anomaly detection — automatically adapting MFA requirements, scoring session risk, and logging every security event with full audit trail.
 
-## React Compiler
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat-square&logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.109-green?style=flat-square&logo=fastapi)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?style=flat-square&logo=postgresql)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-Isolation_Forest-orange?style=flat-square&logo=scikit-learn)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker)
+![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=flat-square&logo=githubactions)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Table of Contents
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [What is ZTAM?](#what-is-ztam)
+- [Key Features](#key-features)
+- [System Architecture](#system-architecture)
+- [ML Model](#ml-model--isolation-forest)
+- [Tech Stack](#tech-stack)
+- [Database Schema](#database-schema)
+- [API Reference](#api-reference)
+- [How to Run](#how-to-run)
+- [Project Structure](#project-structure)
+- [Security Concepts](#security-concepts)
+- [Screenshots](#screenshots)
+- [Author](#author)
+  '''
+  with open('README.md', 'w') as f:
+  f.write(content)
+  print('README skeleton created')
+  "
