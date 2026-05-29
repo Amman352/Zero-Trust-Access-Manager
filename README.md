@@ -29,3 +29,19 @@
 - [Security Concepts](#security-concepts)
 - [Screenshots](#screenshots)
 - [Author](#author)
+
+---
+
+## What is ZTAM?
+
+Traditional authentication systems operate on a **trust-but-verify** model — once a user logs in, they are trusted for the entire session. This is exactly how credential-based breaches happen. Stolen tokens, session hijacking, and insider threats all exploit this assumption.
+
+**Zero Trust Access Manager** implements a **never trust, always verify** architecture. Every login and every session is scored in real time using:
+
+- Behavioral signals (login hour, device fingerprint, IP address)
+- ML-generated anomaly scores via Isolation Forest
+- Adaptive MFA gating — low risk sessions skip MFA, high risk sessions are challenged
+- RBAC enforcement at the API dependency layer
+- Tamper-evident audit logging of every security event
+
+The result is a system that responds to threat signals automatically — no human intervention required for standard threat patterns.
