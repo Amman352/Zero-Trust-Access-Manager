@@ -62,3 +62,65 @@ The result is a system that responds to threat signals automatically — no huma
 | 08  | 🐳 Docker               | Full 7-service stack with one command — postgres, redis, backend, frontend, prometheus, grafana |
 | 09  | ⚙️ CI/CD                | GitHub Actions pipeline — lint, type check, 8 unit tests on every PR                            |
 | 10  | 📈 Prometheus + Grafana | API metrics scraped and visualized in real time                                                 |
+
+---
+
+## System Architecture
+
+\`\`\`
+┌─────────────────────────────────────────────────────────────────────┐
+│ CLIENT LAYER │
+│ React Dashboard · Admin Panel · 3rd Party Apps │
+└──────────────────────┬──────────────────────────────────────────────┘
+│ HTTPS
+▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ API GATEWAY (Nginx) │
+│ Rate limiting · JWT validation · SSL termination │
+└──────────────────────┬──────────────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ CORE SERVICES (FastAPI) │
+│ │
+│ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌──────────┐ │
+│ │ Auth Service│ │ MFA Service │ │ RBAC Service│ │ Sessions │ │
+│ │ OAuth2·JWT │ │ TOTP·WebAu │ │ Roles·IAM │ │ Monitor │ │
+│ └─────────────┘ └─────────────┘ └─────────────┘ └──────────┘ │
+│ │
+│ ┌─────────────────────────┐ ┌─────────────────────────────────┐ │
+│ │ Risk Engine │ │ Audit Logger │ │
+│ │ Geo·Device·Behavior │ │ Events·Access Logs·Timeline │ │
+│ └─────────────────────────┘ └─────────────────────────────────┘ │
+└──────────────────────┬──────────────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ ML ENGINE │
+│ │
+│ ┌──────────────────┐ ┌─────────────────┐ ┌───────────────────┐ │
+│ │ Anomaly Detector │ │ Device Scorer │ │ Behavior Analyzer │ │
+│ │ Isolation Forest │ │ Random Forest │ │ Time-series │ │
+│ └──────────────────┘ └─────────────────┘ └───────────────────┘ │
+└──────────────────────┬──────────────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ DATA LAYER │
+│ │
+│ ┌──────────────┐ ┌────────────┐ ┌──────────────┐ ┌──────────┐ │
+│ │ PostgreSQL │ │ Redis │ │Elasticsearch │ │ Celery │ │
+│ │ Primary DB │ │ Sessions │ │ Audit Logs │ │ Workers │ │
+│ └──────────────┘ └────────────┘ └──────────────┘ └──────────┘ │
+└──────────────────────┬──────────────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────────────────┐
+│ INFRASTRUCTURE & DEPLOYMENT │
+│ │
+│ ┌──────────┐ ┌────────────────┐ ┌──────────────┐ ┌──────────┐ │
+│ │ Docker │ │ GitHub Actions │ │ Render │ │Prometheus│ │
+│ │ Compose │ │ CI/CD │ │ Cloud Deploy│ │ +Grafana │ │
+│ └──────────┘ └────────────────┘ └──────────────┘ └──────────┘ │
+└─────────────────────────────────────────────────────────────────────┘
+\`\`\`
