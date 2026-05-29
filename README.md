@@ -1,5 +1,4 @@
-python3 -c "
-content = '''# 🛡️ Zero Trust Access Manager (ZTAM)
+🛡️ Zero Trust Access Manager (ZTAM)
 
 **Enterprise-grade Zero Trust Authentication Platform with ML-Powered Risk Scoring**
 
