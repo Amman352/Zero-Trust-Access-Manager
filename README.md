@@ -45,3 +45,20 @@ Traditional authentication systems operate on a **trust-but-verify** model — o
 - Tamper-evident audit logging of every security event
 
 The result is a system that responds to threat signals automatically — no human intervention required for standard threat patterns.
+
+---
+
+## Key Features
+
+| #   | Feature                 | Description                                                                                     |
+| --- | ----------------------- | ----------------------------------------------------------------------------------------------- |
+| 01  | 🔐 JWT Authentication   | OAuth2 + JWT with access/refresh token rotation and Redis blacklisting                          |
+| 02  | 🧠 ML Risk Scoring      | Isolation Forest anomaly detection on 5 behavioral features per login                           |
+| 03  | ⚡ Adaptive MFA         | TOTP-based MFA auto-triggered when risk score exceeds threshold                                 |
+| 04  | 👥 RBAC Engine          | 5-tier role system enforced at FastAPI dependency injection layer                               |
+| 05  | 📡 Session Intelligence | Every session stores risk score, trust score, device fingerprint                                |
+| 06  | 🔍 Audit Trail          | Typed AuditAction enum — every event queryable, filterable, exportable                          |
+| 07  | 📊 SOC Dashboard        | CrowdStrike-inspired React dashboard with charts, threat feed, session monitor                  |
+| 08  | 🐳 Docker               | Full 7-service stack with one command — postgres, redis, backend, frontend, prometheus, grafana |
+| 09  | ⚙️ CI/CD                | GitHub Actions pipeline — lint, type check, 8 unit tests on every PR                            |
+| 10  | 📈 Prometheus + Grafana | API metrics scraped and visualized in real time                                                 |
