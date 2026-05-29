@@ -1,14 +1,5 @@
 python3 -c "
-content = '''# Zero Trust Access Manager
-
-\`\`\`
-███████╗████████╗ █████╗ ███╗ ███╗
-╚════██║╚══██╔══╝██╔══██╗████╗ ████║
-██╔╝ ██║ ███████║██╔████╔██║
-██╔╝ ██║ ██╔══██║██║╚██╔╝██║
-██║ ██║ ██║ ██║██║ ╚═╝ ██║
-╚═╝ ╚═╝ ╚═╝ ╚═╝╚═╝ ╚═╝
-\`\`\`
+content = '''# 🛡️ Zero Trust Access Manager (ZTAM)
 
 **Enterprise-grade Zero Trust Authentication Platform with ML-Powered Risk Scoring**
 
@@ -42,5 +33,5 @@ content = '''# Zero Trust Access Manager
   '''
   with open('README.md', 'w') as f:
   f.write(content)
-  print('README skeleton created')
+  print('README updated with clean typography')
   "
