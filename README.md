@@ -486,6 +486,13 @@ cd frontend && npm run dev
 
 ---
 
+## Demo Accounts
+
+| Role  | Email            |
+| ----- | ---------------- |
+| Admin | admin@ztam.local |
+| User  | user@ztam.local  |
+
 ## Project Structure
 
 ```
